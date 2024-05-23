@@ -1,14 +1,16 @@
 plugins {
     alias(libs.plugins.android.application)
     alias(libs.plugins.jetbrains.kotlin.android)
+    id("com.google.devtools.ksp") version "1.9.21-1.0.15"
+    id("kotlin-parcelize")
 }
 
 android {
-    namespace = "com.example.storysnap"
+    namespace = "com.example.snapstory"
     compileSdk = 34
 
     defaultConfig {
-        applicationId = "com.example.storysnap"
+        applicationId = "com.example.snapstory"
         minSdk = 28
         targetSdk = 34
         versionCode = 1
@@ -33,6 +35,10 @@ android {
     kotlinOptions {
         jvmTarget = "1.8"
     }
+    buildFeatures {
+        viewBinding = true
+        buildConfig = true
+    }
 }
 
 dependencies {
@@ -45,4 +51,28 @@ dependencies {
     testImplementation(libs.junit)
     androidTestImplementation(libs.androidx.junit)
     androidTestImplementation(libs.androidx.espresso.core)
+
+    implementation(libs.androidx.datastore.preferences)
+    implementation(libs.androidx.datastore.core)
+
+    implementation (libs.viewbindingpropertydelegate)
+    implementation (libs.androidx.activity.ktx)
+    implementation(libs.androidx.lifecycle.viewmodel.ktx)
+    implementation(libs.androidx.lifecycle.livedata.ktx)
+    implementation (libs.kotlinx.coroutines.android)
+
+    implementation(libs.androidx.core.splashscreen)
+
+    implementation(libs.glide)
+
+    implementation(libs.androidx.room.runtime)
+    annotationProcessor(libs.androidx.room.compiler)
+    ksp(libs.androidx.room.compiler)
+    implementation(libs.androidx.room.ktx)
+
+    implementation (libs.gson)
+    implementation (libs.retrofit)
+    implementation (libs.converter.gson)
+    implementation (libs.logging.interceptor)
+
 }

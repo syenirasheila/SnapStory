@@ -1,4 +1,4 @@
-package com.example.storysnap
+package com.example.snapstory
 
 import org.junit.Test
 

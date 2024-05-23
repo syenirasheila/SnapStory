@@ -19,6 +19,6 @@ dependencyResolutionManagement {
     }
 }
 
-rootProject.name = "StorySnap"
+rootProject.name = "SnapStory"
 include(":app")
  
