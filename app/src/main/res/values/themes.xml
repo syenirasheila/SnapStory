@@ -21,12 +21,37 @@
         <item name="android:textColor">@color/black</item>
     </style>
 
+    <style name="TextStyle.LOGO">
+        <item name="fontFamily">@font/generalsans_bold</item>
+        <item name="android:textSize">28sp</item>
+        <item name="android:textColor">@color/white</item>
+    </style>
+
     <style name="TextStyle.SUBTITLE">
         <item name="fontFamily">@font/generalsans_regular</item>
         <item name="android:textSize">14sp</item>
         <item name="android:lineSpacingExtra">8dp</item>
         <item name="android:textColor">@color/dark_grey</item>
     </style>
+
+    <style name="TextStyle.LABEL">
+        <item name="fontFamily">@font/generalsans_regular</item>
+        <item name="android:textSize">13sp</item>
+        <item name="android:textColor">@color/dark_grey</item>
+    </style>
+
+    <style name="TextStyle.LABEL2">
+        <item name="fontFamily">@font/generalsans_semibold</item>
+        <item name="android:textSize">13sp</item>
+        <item name="android:textColor">@color/lavender</item>
+    </style>
+
+    <style name="TextStyle.INPUT">
+        <item name="fontFamily">@font/generalsans_regular</item>
+        <item name="android:textSize">14sp</item>
+        <item name="android:textColorHint">@color/dark_grey</item>
+    </style>
+
 
     <style name="TextStyle.BUTTON">
         <item name="fontFamily">@font/generalsans_semibold</item>

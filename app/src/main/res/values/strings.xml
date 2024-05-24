@@ -8,5 +8,16 @@
     <string name="tv_subtitle_onboarding">Snap, share, and connect. Bring your stories to life \nand share them with friends. It’s free!</string>
     <string name="btn_signup_onboarding">Sign up</string>
     <string name="btn_signin_onboarding">Sign in</string>
-    <string name="iv_onboarding">Illustration of memojis of friends connected by dashed circles, representing social connections</string>
+    <string name="iv_onboarding">Illustration memojis of friends connected by dashed circles, representing social connections</string>
+    <string name="bg_accent">Background image featuring purple icons related to photography and creativity, including cameras, photos, and a pencil</string>
+    <string name="tv_logo">SnapStory</string>
+    <string name="iv_memojis">Row of memojis representing five diverse characters, each within a colored circular frame</string>
+    <string name="tv_title_signin_first">Welcome back to</string>
+    <string name="tv_title_signin_second">SnapStory!</string>
+    <string name="tv_subtitle_signin">Please sign in with your email to continue.</string>
+    <string name="input_email">Email</string>
+    <string name="input_password">Password</string>
+    <string name="btn_signin">Sign in</string>
+    <string name="tv_donthave_account">Don\'t have an account?</string>
+    <string name="tv_signup">Sign up</string>
 </resources>

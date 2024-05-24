@@ -4,7 +4,7 @@
     <color name="white">#FFFFFFFF</color>
     <color name="lavender">#7449F0</color>
     <color name="lavender_blue">#591FFE</color>
-    <color name="dark_grey">#686666</color>
-    <color name="grey">#8F9098</color>
+    <color name="dark_grey">#232323</color>
+    <color name="grey">#57585C</color>
     <color name="light_grey">#C5C6CC</color>
 </resources>
