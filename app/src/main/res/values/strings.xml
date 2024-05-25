@@ -5,7 +5,7 @@
     <string name="tv_title_onboarding_third">SnapStory!</string>
     <string name="iv_sparkle">Sparkle accent</string>
     <string name="iv_highlight">Highlight accent</string>
-    <string name="tv_subtitle_onboarding">Snap, share, and connect. Bring your stories to life \nand share them with friends. It’s free!</string>
+    <string name="tv_desc_onboarding">Snap, share, and connect. Bring your stories to life \nand share them with friends. It’s free!</string>
     <string name="btn_signup_onboarding">Sign up</string>
     <string name="btn_signin_onboarding">Sign in</string>
     <string name="iv_onboarding">Illustration memojis of friends connected by dashed circles, representing social connections</string>

@@ -13,7 +13,7 @@ import androidx.activity.viewModels
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.animation.doOnEnd
 import androidx.core.splashscreen.SplashScreen.Companion.installSplashScreen
-import com.example.snapstory.ui.main.MainActivity
+import com.example.snapstory.ui.onboarding.OnboardingActivity
 
 @SuppressLint("CustomSplashScreen")
 class SplashscreenActivity : AppCompatActivity() {
@@ -44,7 +44,7 @@ class SplashscreenActivity : AppCompatActivity() {
         super.onResume()
 
         Handler(Looper.getMainLooper()).postDelayed({
-            goToMainActivity()
+            goToOnboardingActivity()
         }, 2000L)
 
     }
@@ -54,8 +54,8 @@ class SplashscreenActivity : AppCompatActivity() {
         Handler(Looper.getMainLooper()).removeCallbacksAndMessages(null)
     }
 
-    private fun goToMainActivity() {
-        Intent(this, MainActivity::class.java).also {
+    private fun goToOnboardingActivity() {
+        Intent(this, OnboardingActivity::class.java).also {
             startActivity(it)
             finish()
         }

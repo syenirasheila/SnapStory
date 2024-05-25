@@ -16,9 +16,10 @@
         android:layout_marginTop="58dp"
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintBottom_toTopOf="@id/tv_subtitle_onboarding">
+        app:layout_constraintBottom_toTopOf="@id/tv_desc_onboarding">
 
         <LinearLayout
+            android:id="@+id/first_title_layout"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:orientation="horizontal"
@@ -29,14 +30,18 @@
                 style="@style/TextStyle.TITLE"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="@string/tv_title_onboarding_first"/>
+                android:text="@string/tv_title_onboarding_first"
+                android:alpha="0"
+                tools:alpha="100" />
 
             <ImageView
                 android:id="@+id/iv_sparkle"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:contentDescription="@string/iv_sparkle"
-                tools:src="@drawable/ic_sparkle"/>
+                app:srcCompat="@drawable/ic_sparkle"
+                android:alpha="0"
+                tools:alpha="100" />
         </LinearLayout>
 
         <TextView
@@ -44,7 +49,9 @@
             style="@style/TextStyle.TITLE"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="@string/tv_title_onboarding_second"/>
+            android:text="@string/tv_title_onboarding_second"
+            android:alpha="0"
+            tools:alpha="100" />
 
         <LinearLayout
             android:layout_width="wrap_content"
@@ -58,29 +65,35 @@
                 android:textColor="@color/lavender"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="@string/tv_title_onboarding_third"/>
+                android:text="@string/tv_title_onboarding_third"
+                android:alpha="0"
+                tools:alpha="100" />
 
             <ImageView
                 android:id="@+id/iv_highlight"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:contentDescription="@string/iv_highlight"
-                tools:src="@drawable/ic_highlight"/>
+                app:srcCompat="@drawable/ic_highlight"
+                android:alpha="0"
+                tools:alpha="100" />
 
         </LinearLayout>
     </LinearLayout>
 
     <TextView
-        android:id="@+id/tv_subtitle_onboarding"
+        android:id="@+id/tv_desc_onboarding"
         style="@style/TextStyle.SUBTITLE"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginStart="24dp"
         android:layout_marginTop="18dp"
-        android:text="@string/tv_subtitle_onboarding"
+        android:text="@string/tv_desc_onboarding"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@id/title_onboarding_layout"
-        app:layout_constraintBottom_toTopOf="@id/btn_layout_onboarding"/>
+        app:layout_constraintBottom_toTopOf="@id/btn_layout_onboarding"
+        android:alpha="0"
+        tools:alpha="100" />
 
     <LinearLayout
         android:id="@+id/btn_layout_onboarding"
@@ -91,7 +104,7 @@
         android:layout_marginTop="24dp"
         android:layout_marginBottom="20dp"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/tv_subtitle_onboarding">
+        app:layout_constraintTop_toBottomOf="@id/tv_desc_onboarding">
 
         <com.google.android.material.button.MaterialButton
             android:id="@+id/btn_signin_onboarding"
@@ -104,7 +117,8 @@
             android:text="@string/btn_signin_onboarding"
             android:textColor="@color/lavender"
             app:backgroundTint="@null"
-            tools:ignore="VisualLintButtonSize,TextContrastCheck"/>
+            android:alpha="0"
+            tools:alpha="100" />
 
         <com.google.android.material.button.MaterialButton
             android:id="@+id/btn_signup_onboarding"
@@ -116,15 +130,16 @@
             android:text="@string/btn_signup_onboarding"
             app:backgroundTint="@null"
             app:layout_constraintStart_toStartOf="parent"
-            tools:ignore="VisualLintButtonSize,TextContrastCheck"/>
+            android:alpha="0"
+            tools:alpha="100" />
     </LinearLayout>
 
     <ImageView
         android:id="@+id/iv_onboarding"
         android:layout_width="match_parent"
-        android:layout_height="450dp"
+        android:layout_height="0dp"
         android:contentDescription="@string/iv_onboarding"
-        tools:src="@drawable/img_onboarding"
+        app:srcCompat="@drawable/img_onboarding"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintBottom_toBottomOf="parent"
