@@ -43,7 +43,7 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@id/tv_logo"
         app:srcCompat="@drawable/img_memojis"/>
-    
+
     <LinearLayout
         android:id="@+id/bg_signin_card"
         android:layout_width="match_parent"
@@ -53,16 +53,17 @@
         android:weightSum="10"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent">
+        app:layout_constraintStart_toStartOf="parent"
+        tools:ignore="TextSizeCheck">
 
         <LinearLayout
             android:id="@+id/title_signin_layout"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:orientation="vertical"
             android:layout_gravity="center"
-            android:gravity="center"
             android:layout_marginTop="28dp"
+            android:gravity="center"
+            android:orientation="vertical"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent">
 
@@ -71,8 +72,8 @@
                 style="@style/TextStyle.TITLE"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="@string/tv_title_signin_first"
                 android:alpha="0"
+                android:text="@string/tv_title_signin_first"
                 tools:alpha="100" />
 
             <TextView
@@ -80,9 +81,9 @@
                 style="@style/TextStyle.TITLE"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
+                android:alpha="0"
                 android:text="@string/tv_title_signin_second"
                 android:textColor="@color/lavender"
-                android:alpha="0"
                 tools:alpha="100" />
 
             <TextView
@@ -90,23 +91,24 @@
                 style="@style/TextStyle.SUBTITLE"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="16dp"
-                android:text="@string/tv_desc_signin"/>
+                android:textAlignment="center"
+                android:layout_marginTop="18dp"
+                android:text="@string/tv_desc_signin" />
         </LinearLayout>
 
         <LinearLayout
             android:id="@+id/input_signin_layout"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:orientation="vertical"
             android:layout_gravity="center"
-            android:gravity="center"
             android:layout_marginTop="28dp"
             android:layout_marginBottom="24dp"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintTop_toBottomOf="@id/title_signin_layout"
             android:alpha="0"
+            android:gravity="center"
+            android:orientation="vertical"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/title_signin_layout"
             tools:alpha="100">
 
             <com.google.android.material.textfield.TextInputLayout
@@ -152,13 +154,13 @@
             android:layout_height="48dp"
             android:layout_gravity="center"
             android:layout_marginBottom="18dp"
+            android:alpha="0"
             android:background="@drawable/btn_primary"
             android:text="@string/btn_signin"
             app:backgroundTint="@null"
-            app:layout_constraintTop_toBottomOf="@id/input_signin_layout"
-            app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
-            android:alpha="0"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/input_signin_layout"
             tools:alpha="100" />
 
         <LinearLayout
@@ -166,27 +168,38 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_gravity="center"
-            android:orientation="horizontal"
             android:alpha="0"
-            tools:alpha="100" >
+            android:orientation="horizontal"
+            tools:alpha="100">
 
             <TextView
                 android:id="@+id/tv_donthave_account"
                 style="@style/TextStyle.LABEL"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="@string/tv_donthave_account"/>
+                android:text="@string/tv_donthave_account" />
 
             <TextView
                 android:id="@+id/tv_signup"
                 style="@style/TextStyle.LABEL2"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="@string/tv_signup"
                 android:layout_marginStart="4dp"
-                android:textColor="@color/lavender"/>
+                android:text="@string/tv_signup"
+                android:textColor="@color/lavender" />
         </LinearLayout>
     </LinearLayout>
+
+    <com.google.android.material.progressindicator.LinearProgressIndicator
+        android:id="@+id/progress_indicator_signin"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:indeterminate="true"
+        android:indeterminateTint="@color/lavender_blue"
+        android:visibility="gone"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
 
 
 </androidx.constraintlayout.widget.ConstraintLayout>
