@@ -11,7 +11,6 @@ import com.example.snapstory.ui.signin.SignInActivity
 import com.example.snapstory.ui.signup.SignUpActivity
 
 
-@Suppress("DEPRECATION")
 class OnboardingActivity : AppCompatActivity() {
 
     private lateinit var binding: ActivityOnboardingBinding
@@ -29,13 +28,11 @@ class OnboardingActivity : AppCompatActivity() {
         binding.btnSigninOnboarding.setOnClickListener {
             val intent = Intent(this, SignInActivity::class.java)
             startActivity(intent)
-            overridePendingTransition(android.R.anim.slide_in_left, android.R.anim.slide_out_right)
         }
 
         binding.btnSignupOnboarding.setOnClickListener {
             val intent = Intent(this, SignUpActivity::class.java)
             startActivity(intent)
-            overridePendingTransition(android.R.anim.slide_in_left, android.R.anim.slide_out_right)
         }
     }
 
@@ -46,8 +43,8 @@ class OnboardingActivity : AppCompatActivity() {
             repeatMode = ObjectAnimator.REVERSE
         }.start()
 
-        val signin = ObjectAnimator.ofFloat(binding.btnSigninOnboarding, View.ALPHA, 1f).setDuration(100)
-        val signup = ObjectAnimator.ofFloat(binding.btnSignupOnboarding, View.ALPHA, 1f).setDuration(100)
+        val btnSignin = ObjectAnimator.ofFloat(binding.btnSigninOnboarding, View.ALPHA, 1f).setDuration(100)
+        val btnSignup = ObjectAnimator.ofFloat(binding.btnSignupOnboarding, View.ALPHA, 1f).setDuration(100)
         val sparkleAccent = ObjectAnimator.ofFloat(binding.ivSparkle, View.ALPHA, 1f).setDuration(100)
         val highlightAccent = ObjectAnimator.ofFloat(binding.ivHighlight, View.ALPHA, 1f).setDuration(100)
         val firstTitle = ObjectAnimator.ofFloat(binding.tvTitleOnboardingFirst, View.ALPHA, 1f).setDuration(100)
@@ -60,7 +57,7 @@ class OnboardingActivity : AppCompatActivity() {
         }
 
         val btnTogether = AnimatorSet().apply {
-            playTogether(signin, signup)
+            playTogether(btnSignin, btnSignup)
         }
 
         AnimatorSet().apply {

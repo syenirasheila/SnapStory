@@ -17,7 +17,7 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        tools:src="@drawable/bg_accent"/>
+        app:srcCompat="@drawable/bg_accent"/>
 
     <TextView
         android:id="@+id/tv_logo"
@@ -42,7 +42,7 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@id/tv_logo"
-        tools:src="@drawable/img_memojis"/>
+        app:srcCompat="@drawable/img_memojis"/>
     
     <LinearLayout
         android:id="@+id/bg_signin_card"
@@ -71,7 +71,9 @@
                 style="@style/TextStyle.TITLE"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="@string/tv_title_signin_first" />
+                android:text="@string/tv_title_signin_first"
+                android:alpha="0"
+                tools:alpha="100" />
 
             <TextView
                 android:id="@+id/tv_title_signin_second"
@@ -79,15 +81,17 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="@string/tv_title_signin_second"
-                android:textColor="@color/lavender" />
+                android:textColor="@color/lavender"
+                android:alpha="0"
+                tools:alpha="100" />
 
             <TextView
-                android:id="@+id/tv_subtitle_signin"
+                android:id="@+id/tv_desc_signin"
                 style="@style/TextStyle.SUBTITLE"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="16dp"
-                android:text="@string/tv_subtitle_signin"/>
+                android:text="@string/tv_desc_signin"/>
         </LinearLayout>
 
         <LinearLayout
@@ -97,47 +101,47 @@
             android:orientation="vertical"
             android:layout_gravity="center"
             android:gravity="center"
-            android:layout_marginTop="24dp"
-            android:layout_marginBottom="12dp"
+            android:layout_marginTop="28dp"
+            android:layout_marginBottom="24dp"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintTop_toBottomOf="@id/title_signin_layout">
+            app:layout_constraintTop_toBottomOf="@id/title_signin_layout"
+            android:alpha="0"
+            tools:alpha="100">
 
             <com.google.android.material.textfield.TextInputLayout
                 android:id="@+id/input_email_signin_layout"
-                style="@style/TextStyle.INPUT"
+                style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:hint="@string/input_email"
                 app:errorEnabled="true">
-                <com.google.android.material.textfield.TextInputEditText
+
+                <com.example.snapstory.ui.customview.EmailInputEditText
                     android:id="@+id/input_email_signin"
                     style="@style/TextStyle.INPUT"
                     android:layout_width="320dp"
-                    android:layout_height="wrap_content"
-                    android:background="@drawable/bg_input"
+                    android:layout_height="48dp"
+                    android:hint="@string/input_email"
                     android:inputType="textEmailAddress"
-                    android:textColorHint="@color/grey"/>
+                    tools:ignore="TextContrastCheck" />
             </com.google.android.material.textfield.TextInputLayout>
 
             <com.google.android.material.textfield.TextInputLayout
                 android:id="@+id/input_password_signin_layout"
-                style="@style/TextStyle.INPUT"
+                style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                app:errorEnabled="true"
-                app:endIconMode="password_toggle"
-                app:endIconTint="@color/grey"
-                app:errorIconDrawable="@null"
-                android:hint="@string/input_password">
-                <com.google.android.material.textfield.TextInputEditText
+                android:layout_marginTop="4dp"
+                app:errorEnabled="true">
+
+                <com.example.snapstory.ui.customview.PasswordInputEditText
                     android:id="@+id/input_password_signin"
                     style="@style/TextStyle.INPUT"
                     android:layout_width="320dp"
-                    android:layout_height="wrap_content"
+                    android:layout_height="48dp"
+                    android:hint="@string/input_password"
                     android:inputType="textPassword"
-                    android:textColorHint="@color/grey"
-                    android:background="@drawable/bg_input"/>
+                    tools:ignore="TextContrastCheck" />
             </com.google.android.material.textfield.TextInputLayout>
         </LinearLayout>
 
@@ -153,13 +157,18 @@
             app:backgroundTint="@null"
             app:layout_constraintTop_toBottomOf="@id/input_signin_layout"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintEnd_toEndOf="parent"/>
+            app:layout_constraintEnd_toEndOf="parent"
+            android:alpha="0"
+            tools:alpha="100" />
 
         <LinearLayout
+            android:id="@+id/footer_layout"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_gravity="center"
-            android:orientation="horizontal">
+            android:orientation="horizontal"
+            android:alpha="0"
+            tools:alpha="100" >
 
             <TextView
                 android:id="@+id/tv_donthave_account"
@@ -177,7 +186,7 @@
                 android:layout_marginStart="4dp"
                 android:textColor="@color/lavender"/>
         </LinearLayout>
-
     </LinearLayout>
+
 
 </androidx.constraintlayout.widget.ConstraintLayout>
