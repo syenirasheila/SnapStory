@@ -7,8 +7,8 @@ import android.os.Bundle
 import android.view.View
 import androidx.appcompat.app.AppCompatActivity
 import com.example.snapstory.databinding.ActivityOnboardingBinding
-import com.example.snapstory.ui.signin.SignInActivity
-import com.example.snapstory.ui.signup.SignUpActivity
+import com.example.snapstory.ui.signin.SigninActivity
+import com.example.snapstory.ui.signup.SignupActivity
 
 
 class OnboardingActivity : AppCompatActivity() {
@@ -26,12 +26,12 @@ class OnboardingActivity : AppCompatActivity() {
 
     private fun setupAction() {
         binding.btnSigninOnboarding.setOnClickListener {
-            val intent = Intent(this, SignInActivity::class.java)
+            val intent = Intent(this, SigninActivity::class.java)
             startActivity(intent)
         }
 
         binding.btnSignupOnboarding.setOnClickListener {
-            val intent = Intent(this, SignUpActivity::class.java)
+            val intent = Intent(this, SignupActivity::class.java)
             startActivity(intent)
         }
     }

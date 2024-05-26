@@ -30,5 +30,13 @@
     <string name="btn_signup">Sign up</string>
     <string name="tv_have_account">Already have an account?</string>
     <string name="tv_signin">Sign in</string>
+    <string name="input_name">Name</string>
+    <string name="fill_all_fields">Please fill in all required fields</string>
+    <string name="signup_success">Successfully created an account!</string>
+    <string name="signup_failed">Unexpected error occurred when creating an account</string>
+    <string name="input_error">Incorrect email or password, please try again</string>
+    <string name="signin_success">Successfully sign in, enjoy SnapStory!</string>
+    <string name="signin_failed">Unexpected error occured when logging in</string>
+    <string name="email_already_taken">Email is already taken, please use different email</string>
 
 </resources>

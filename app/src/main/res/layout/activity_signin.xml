@@ -5,7 +5,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:background="@color/lavender"
-    tools:context=".ui.signin.SignInActivity">
+    tools:context=".ui.signin.SigninActivity">
 
     <ImageView
         android:id="@+id/bg_accent"
