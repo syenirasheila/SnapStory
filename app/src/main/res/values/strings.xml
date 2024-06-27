@@ -67,5 +67,4 @@
     <string name="postStory_failed">Failed to post story</string>
     <string name="image_empty">Please add an image</string>
     <string name="storyDetail_failed">Failed to show the story detail</string>
-    <string name="title_activity_story_maps">StoryMapsActivity</string>
 </resources>
