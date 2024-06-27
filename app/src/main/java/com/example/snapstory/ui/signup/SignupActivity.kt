@@ -26,11 +26,6 @@ class SignupActivity : AppCompatActivity() {
         binding = ActivitySignupBinding.inflate(layoutInflater)
         setContentView(binding.root)
 
-        binding.tvSignin.setOnClickListener {
-            val intent = Intent(this, SigninActivity::class.java)
-            startActivity(intent)
-        }
-
         setupAction()
         playAnimation()
     }
@@ -43,42 +38,38 @@ class SignupActivity : AppCompatActivity() {
             val password = binding.inputPasswordSignup.text.toString()
 
             if (!isInputValid(name, email, password)) {
-                showToast(R.string.fill_all_fields.toString())
+                showToast(getString(R.string.fill_all_fields))
                 return@setOnClickListener
             }
 
-            signupViewModel.signupResponse.observe(this) {
+            signupViewModel.signup(name, email, password).observe(this) {
                 when (it) {
-                    is UserResult.Success<*> -> {
+                    is UserResult.Success -> {
                         showLoading(false)
-                        val intent = Intent(this, SigninActivity::class.java)
-                        startActivity(intent)
-                        showToast(R.string.signup_success.toString())
-                        this.finish()
+                        showToast(getString(R.string.signup_success))
+                        navigateToSigninActivity()
                     }
                     is UserResult.Loading -> {
                         showLoading(true)
                     }
                     is UserResult.Error -> {
                         showLoading(false)
-                        if (it.error == "Email is already taken") {
-                            showToast(R.string.email_already_taken.toString())
+                        if (it.error.contains("Email is already taken", true)) {
+                            showToast(getString(R.string.email_already_taken))
                         } else {
-                            showToast(R.string.signup_failed.toString())
+                            showToast(getString(R.string.signin_failed))
                         }
                     }
                 }
             }
-            signupViewModel.signup (
-                name,
-                email,
-                password
-            )
         }
 
         binding.tvSignin.setOnClickListener {
-            val intent = Intent(this, SigninActivity::class.java)
+            val intent = Intent(this, SigninActivity::class.java).apply {
+                flags = Intent.FLAG_ACTIVITY_CLEAR_TOP or Intent.FLAG_ACTIVITY_CLEAR_TASK
+            }
             startActivity(intent)
+            finish()
         }
 
     }
@@ -107,14 +98,22 @@ class SignupActivity : AppCompatActivity() {
         }.start()
     }
 
+    private fun navigateToSigninActivity() {
+        val intent = Intent(this, SigninActivity::class.java).apply {
+            flags = Intent.FLAG_ACTIVITY_NEW_TASK or Intent.FLAG_ACTIVITY_CLEAR_TASK
+        }
+        startActivity(intent)
+        finish()
+    }
+
     private fun showLoading(isLoading: Boolean) {
-        binding.progressIndicatorSignup.visibility = if (isLoading) View.VISIBLE else View.GONE
+        binding.progressIndicator.visibility = if (isLoading) View.VISIBLE else View.GONE
     }
 
     private fun isInputValid(name: String, email: String, password: String): Boolean {
         val isNameValid = name.isNotEmpty()
         val isEmailValid = email.isNotEmpty() && android.util.Patterns.EMAIL_ADDRESS.matcher(email).matches()
-        val isPasswordValid = password.isNotEmpty() && password.length in 8..10
+        val isPasswordValid = password.isNotEmpty() && password.length >= 8
 
         return isNameValid && isEmailValid && isPasswordValid
     }

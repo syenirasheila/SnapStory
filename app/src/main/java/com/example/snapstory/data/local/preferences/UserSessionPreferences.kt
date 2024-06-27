@@ -8,7 +8,6 @@ import androidx.datastore.preferences.core.edit
 import androidx.datastore.preferences.core.stringPreferencesKey
 import androidx.datastore.preferences.preferencesDataStore
 import kotlinx.coroutines.flow.Flow
-import kotlinx.coroutines.flow.first
 import kotlinx.coroutines.flow.map
 
 
@@ -45,20 +44,11 @@ class UserSessionPreference private constructor(private val dataStore: DataStore
         }
     }
 
-    suspend fun getUserData(): UserSessionModel{
-        val preferences = dataStore.data.first()
-        return UserSessionModel(
-            preferences[EMAIL_KEY] ?: "",
-            preferences[TOKEN_KEY] ?: "",
-            preferences[IS_SESSION_ACTIVE] ?: false
-        )
-    }
-
     suspend fun saveUserSession(userSession: UserSessionModel) {
         dataStore.edit { preferences ->
             preferences[EMAIL_KEY] = userSession.email
             preferences[TOKEN_KEY] = userSession.token
-            preferences[IS_SESSION_ACTIVE] ?: true
+            preferences[IS_SESSION_ACTIVE] = true
         }
     }
 
@@ -67,5 +57,4 @@ class UserSessionPreference private constructor(private val dataStore: DataStore
             preferences.clear()
         }
     }
-
 }

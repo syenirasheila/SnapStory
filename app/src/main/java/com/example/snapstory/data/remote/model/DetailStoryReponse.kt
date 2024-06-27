@@ -2,11 +2,14 @@ package com.example.snapstory.data.remote.model
 
 import com.google.gson.annotations.SerializedName
 
-data class ErrorResponse(
+data class DetailResponse(
 
     @field:SerializedName("error")
     val error: Boolean? = null,
 
     @field:SerializedName("message")
-    val message: String? = null
+    val message: String? = null,
+
+    @field:SerializedName("story")
+    val story: StoryItem
 )

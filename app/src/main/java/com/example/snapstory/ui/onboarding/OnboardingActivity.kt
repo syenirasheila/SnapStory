@@ -5,12 +5,14 @@ import android.animation.ObjectAnimator
 import android.content.Intent
 import android.os.Bundle
 import android.view.View
+import androidx.activity.OnBackPressedCallback
 import androidx.appcompat.app.AppCompatActivity
 import com.example.snapstory.databinding.ActivityOnboardingBinding
 import com.example.snapstory.ui.signin.SigninActivity
 import com.example.snapstory.ui.signup.SignupActivity
 
 
+@Suppress("DEPRECATION")
 class OnboardingActivity : AppCompatActivity() {
 
     private lateinit var binding: ActivityOnboardingBinding
@@ -22,6 +24,23 @@ class OnboardingActivity : AppCompatActivity() {
 
         setupAction()
         playAnimation()
+    }
+
+    @Deprecated("Deprecated")
+    override fun onBackPressed() {
+        super.onBackPressed()
+        onBackPressedDispatcher.onBackPressed()
+    }
+
+    private val onBackPressedCallback = object : OnBackPressedCallback(true) {
+        override fun handleOnBackPressed() {
+            finishAffinity()
+        }
+    }
+
+    override fun onStart() {
+        super.onStart()
+        onBackPressedDispatcher.addCallback(this, onBackPressedCallback)
     }
 
     private fun setupAction() {

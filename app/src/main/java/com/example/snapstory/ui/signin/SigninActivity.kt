@@ -27,11 +27,6 @@ class SigninActivity : AppCompatActivity() {
         binding = ActivitySigninBinding.inflate(layoutInflater)
         setContentView(binding.root)
 
-        binding.tvSignup.setOnClickListener {
-            val intent = Intent(this, SignupActivity::class.java)
-            startActivity(intent)
-        }
-
         setupAction()
         playAnimation()
     }
@@ -43,39 +38,45 @@ class SigninActivity : AppCompatActivity() {
             val password = binding.inputPasswordSignin.text.toString()
 
             if (!isInputValid(email, password)) {
-                showToast(R.string.input_error.toString())
+                showToast(getString(R.string.input_error))
                 return@setOnClickListener
             }
 
-            signinViewModel.signinResponse.observe(this) {
+            signinViewModel.signin(email,password).observe(this) {
                 when (it) {
-                    is UserResult.Success<*> -> {
+                    is UserResult.Success -> {
                         showLoading(false)
-                        val intent = Intent(this, MainActivity::class.java)
-                        startActivity(intent)
-                        showToast(R.string.signin_success.toString())
+                        showToast(getString(R.string.signin_success))
+                        navigateToMainActivity()
                     }
                     is UserResult.Loading -> {
                         showLoading(true)
                     }
                     is UserResult.Error -> {
                         showLoading(false)
-                        showToast(R.string.signin_failed.toString())
+                        when (it.error) {
+                            "User not found" -> {
+                                showToast(getString(R.string.email_notfound))
+                            }
+                            "Invalid password" -> {
+                                showToast(getString(R.string.invalid_password_signin))
+                            }
+                            else -> {
+                                showToast(getString(R.string.signin_failed))
+                            }
+                        }
                     }
                 }
             }
-
-            signinViewModel.signin (
-                email,
-                password
-            )
         }
 
         binding.tvSignup.setOnClickListener {
-            val intent = Intent(this, SignupActivity::class.java)
+            val intent = Intent(this, SignupActivity::class.java).apply {
+                flags = Intent.FLAG_ACTIVITY_CLEAR_TOP or Intent.FLAG_ACTIVITY_CLEAR_TASK
+            }
             startActivity(intent)
+            finish()
         }
-
     }
 
     private fun playAnimation() {
@@ -102,13 +103,21 @@ class SigninActivity : AppCompatActivity() {
         }.start()
     }
 
+    private fun navigateToMainActivity() {
+        val intent = Intent(this, MainActivity::class.java).apply {
+            flags = Intent.FLAG_ACTIVITY_NEW_TASK or Intent.FLAG_ACTIVITY_CLEAR_TASK
+        }
+        startActivity(intent)
+        finish()
+    }
+
     private fun showLoading(isLoading: Boolean) {
-        binding.progressIndicatorSignin.visibility = if (isLoading) View.VISIBLE else View.GONE
+        binding.progressIndicator.visibility = if (isLoading) View.VISIBLE else View.GONE
     }
 
     private fun isInputValid(email: String, password: String): Boolean {
         val isEmailValid = email.isNotEmpty() && android.util.Patterns.EMAIL_ADDRESS.matcher(email).matches()
-        val isPasswordValid = password.isNotEmpty() && password.length in 8..10
+        val isPasswordValid = password.isNotEmpty() && password.length >= 8
 
         return isEmailValid && isPasswordValid
     }

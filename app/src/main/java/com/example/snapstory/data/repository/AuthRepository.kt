@@ -5,14 +5,12 @@ import androidx.lifecycle.liveData
 import com.example.snapstory.data.local.preferences.UserSessionModel
 import com.example.snapstory.data.local.preferences.UserSessionPreference
 import com.example.snapstory.data.remote.api.ApiService
-import com.example.snapstory.data.remote.model.ErrorResponse
 import com.example.snapstory.data.remote.model.LoginResponse
 import com.example.snapstory.data.remote.model.RegisterResponse
 import com.example.snapstory.helper.UserResult
-import com.google.gson.Gson
+import com.example.snapstory.helper.handleError
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.flow.Flow
-import retrofit2.HttpException
 
 class AuthRepository private constructor(
     private val apiService: ApiService,
@@ -26,21 +24,24 @@ class AuthRepository private constructor(
             userSessionPreference: UserSessionPreference
         ): AuthRepository = instance ?: synchronized(this) {
             instance ?: AuthRepository(apiService, userSessionPreference)
-        }.also { instance = it }
+        }.also {
+            instance = it }
     }
 
     fun signup (name: String, email: String, password: String): LiveData<UserResult<RegisterResponse>> {
         return liveData(Dispatchers.IO) {
             emit(UserResult.Loading)
             try {
-                val response = apiService.signup(name, email, password)
-                emit(UserResult.Success(response))
-            } catch (e: HttpException) {
-                val errorBody = e.response()?.errorBody()?.string()
-                val errorResponse = Gson().fromJson(errorBody, ErrorResponse::class.java)
-                emit(UserResult.Error(errorResponse.message.toString()))
+                val response = apiService
+                    .signup(name, email, password)
+                if (response.error) {
+                    emit(UserResult.Error(response.message))
+                } else {
+                    emit(UserResult.Success(response))
+                }
             } catch (e: Exception) {
-                emit(UserResult.Error(e.message.toString()))
+                val errorMessage = handleError(e)
+                emit(UserResult.Error(errorMessage))
             }
         }
     }
@@ -50,12 +51,21 @@ class AuthRepository private constructor(
             emit(UserResult.Loading)
             try {
                 val response = apiService.signin(email, password)
-                response.loginResult?.let {
-                    userSessionPreference.saveUserSession(UserSessionModel(email, it.token, true))
+                if (response.error) {
+                    emit(UserResult.Error(response.message))
+                } else {
+                    userSessionPreference.saveUserSession(
+                        UserSessionModel(
+                            email,
+                            response.loginResult.token,
+                            true
+                        )
+                    )
+                    emit(UserResult.Success(response))
                 }
-                emit(UserResult.Success(response))
             } catch (e: Exception) {
-                emit(UserResult.Error(e.message.toString()))
+                val errorMessage = handleError(e)
+                emit(UserResult.Error(errorMessage))
             }
         }
     }

@@ -5,9 +5,10 @@ import androidx.lifecycle.ViewModel
 import androidx.lifecycle.ViewModelProvider
 import com.example.snapstory.di.RepositoryInjection
 import com.example.snapstory.ui.main.MainViewModel
+import com.example.snapstory.ui.poststory.PostStoryViewModel
 import com.example.snapstory.ui.signin.SigninViewModel
 import com.example.snapstory.ui.signup.SignupViewModel
-
+import com.example.snapstory.ui.storydetail.StoryDetailViewModel
 class ViewModelFactory (private val mApplication: Application) : ViewModelProvider.NewInstanceFactory() {
 
     @Suppress("UNCHECKED_CAST")
@@ -15,7 +16,7 @@ class ViewModelFactory (private val mApplication: Application) : ViewModelProvid
         return when {
 
             modelClass.isAssignableFrom(MainViewModel::class.java) -> {
-                MainViewModel(RepositoryInjection.provideAuthRepository(mApplication)) as T
+                MainViewModel(RepositoryInjection.provideAuthRepository(mApplication), RepositoryInjection.providePostStoryRepository(mApplication)) as T
             }
 
             modelClass.isAssignableFrom(SignupViewModel::class.java) -> {
@@ -24,6 +25,12 @@ class ViewModelFactory (private val mApplication: Application) : ViewModelProvid
 
             modelClass.isAssignableFrom(SigninViewModel::class.java) -> {
                 SigninViewModel(RepositoryInjection.provideAuthRepository(mApplication)) as T
+            }
+            modelClass.isAssignableFrom(StoryDetailViewModel::class.java) -> {
+                StoryDetailViewModel(RepositoryInjection.providePostStoryRepository(mApplication)) as T
+            }
+            modelClass.isAssignableFrom(PostStoryViewModel::class.java) -> {
+                PostStoryViewModel(RepositoryInjection.providePostStoryRepository(mApplication)) as T
             }
 
         else -> throw IllegalArgumentException("Unknown ViewModel class: ${modelClass.name}")

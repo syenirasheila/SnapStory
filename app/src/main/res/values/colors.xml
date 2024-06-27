@@ -3,8 +3,10 @@
     <color name="black">#FF000000</color>
     <color name="white">#FFFFFFFF</color>
     <color name="lavender">#FF7449F0</color>
+    <color name="light_lavender">#F8F6FD</color>
     <color name="lavender_blue">#FF591FFE</color>
     <color name="dark_grey">#FF232323</color>
     <color name="grey">#FF57585C</color>
     <color name="light_grey">#FFC5C6CC</color>
+    <color name="transparent">#997449F0</color>
 </resources>

@@ -44,27 +44,65 @@
 
     <style name="TextStyle.LABEL">
         <item name="fontFamily">@font/generalsans_regular</item>
-        <item name="android:textSize">13sp</item>
+        <item name="android:textSize">14sp</item>
         <item name="android:textColor">@color/dark_grey</item>
     </style>
 
-    <style name="TextStyle.LABEL2">
+    <style name="TextStyle.LABEL_SEMIBOLD">
         <item name="fontFamily">@font/generalsans_semibold</item>
-        <item name="android:textSize">13sp</item>
+        <item name="android:textSize">14sp</item>
+        <item name="android:textColor">@color/lavender</item>
+    </style>
+
+    <style name="TextStyle.VALUE">
+        <item name="fontFamily">@font/generalsans_medium</item>
+        <item name="android:textSize">14sp</item>
+        <item name="android:textColor">@color/dark_grey</item>
+    </style>
+
+    <style name="TextStyle.VALUE_DATE">
+        <item name="fontFamily">@font/generalsans_regular</item>
+        <item name="android:textSize">12sp</item>
+        <item name="android:textColor">@color/grey</item>
+    </style>
+
+    <style name="TextStyle.VALUE_STORY">
+        <item name="fontFamily">@font/generalsans_medium</item>
+        <item name="android:textSize">16sp</item>
+        <item name="android:textColor">@color/white</item>
+    </style>
+
+    <style name="TextStyle.VALUE_STORY_DATE">
+        <item name="fontFamily">@font/generalsans_medium</item>
+        <item name="android:textSize">12sp</item>
+        <item name="android:textColor">@color/lavender</item>
+    </style>
+
+    <style name="TextStyle.VALUE_STORY_NAME">
+        <item name="fontFamily">@font/generalsans_semibold</item>
+        <item name="android:textSize">16sp</item>
         <item name="android:textColor">@color/lavender</item>
     </style>
 
     <style name="TextStyle.INPUT">
         <item name="fontFamily">@font/generalsans_regular</item>
-        <item name="android:textSize">14sp</item>
+        <item name="android:textSize">16sp</item>
         <item name="android:textColorHint">@color/dark_grey</item>
     </style>
-
 
     <style name="TextStyle.BUTTON">
         <item name="fontFamily">@font/generalsans_semibold</item>
         <item name="android:textSize">16sp</item>
         <item name="android:lineSpacingExtra">16dp</item>
         <item name="android:textColor">@color/white</item>
+    </style>
+
+    <style name="ShapeAppearance.Fab.Custom" parent="ShapeAppearance.MaterialComponents.SmallComponent">
+        <item name="cornerFamily">rounded</item>
+        <item name="cornerSize">50%</item>
+    </style>
+
+    <style name="AppBarStyle">
+        <item name="android:background">@color/lavender</item>
     </style>
 </resources>

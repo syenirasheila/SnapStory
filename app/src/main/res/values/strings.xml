@@ -23,7 +23,7 @@
     <string name="email_required">Required</string>
     <string name="invalid_email">Invalid email address</string>
     <string name="password_required">Required</string>
-    <string name="invalid_password">Password must be 8 to 10 characters</string>
+    <string name="invalid_password">Password must be at least 8 characters</string>
     <string name="tv_title_signup_first">Get started with</string>
     <string name="tv_title_signup_second">SnapStory</string>
     <string name="tv_desc_signup">Sign up now and start snapping and sharing your stories with friends!</string>
@@ -36,7 +36,36 @@
     <string name="signup_failed">Unexpected error occurred when creating an account</string>
     <string name="input_error">Incorrect email or password, please try again</string>
     <string name="signin_success">Successfully sign in, enjoy SnapStory!</string>
-    <string name="signin_failed">Unexpected error occured when logging in</string>
+    <string name="signin_failed">Unexpected error occurred when signing in</string>
+    <string name="email_notfound">Email not found, please sign up</string>
+    <string name="invalid_password_signin">Invalid password, please try again</string>
     <string name="email_already_taken">Email is already taken, please use different email</string>
-
+    <string name="btn_post_story">Post story</string>
+    <string name="btn_map">Map</string>
+    <string name="btn_logout">Log out</string>
+    <string name="btn_retry">Retry</string>
+    <string name="tv_user_name">Name</string>
+    <string name="tv_story_date">Wed, 12 June 2024</string>
+    <string name="iv_story">Story</string>
+    <string name="iv_post_story">The image of the story that will be posted</string>
+    <string name="input_description">Add a description</string>
+    <string name="btn_add_story">Add story</string>
+    <string name="btn_close">Close</string>
+    <string name="btn_capture">Capture image</string>
+    <string name="btn_gallery">Gallery</string>
+    <string name="btn_switch">Switch camera</string>
+    <string name="iv_preview_story">Preview Story</string>
+    <string name="tv_story_description">Story description</string>
+    <string name="story_detail_toolbar">Story detail</string>
+    <string name="tv_loading">Loading, please wait…</string>
+    <string name="permission_granted">Permission request granted</string>
+    <string name="permission_denied">Permission request denied</string>
+    <string name="failed_to_start_camera">Failed to start camera, please try again</string>
+    <string name="failed_to_take_photo">Failed to take photo, please try again</string>
+    <string name="camera_activity_tag">CameraActivity</string>
+    <string name="postStory_success">Successfully post story!</string>
+    <string name="postStory_failed">Failed to post story</string>
+    <string name="image_empty">Please add an image</string>
+    <string name="storyDetail_failed">Failed to show the story detail</string>
+    <string name="title_activity_story_maps">StoryMapsActivity</string>
 </resources>

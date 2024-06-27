@@ -84,9 +84,10 @@
     <TextView
         android:id="@+id/tv_desc_onboarding"
         style="@style/TextStyle.SUBTITLE"
-        android:layout_width="wrap_content"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginStart="24dp"
+        android:layout_marginEnd="24dp"
         android:layout_marginTop="18dp"
         android:text="@string/tv_desc_onboarding"
         app:layout_constraintStart_toStartOf="parent"

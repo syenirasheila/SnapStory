@@ -199,7 +199,7 @@
 
             <TextView
                 android:id="@+id/tv_signin"
-                style="@style/TextStyle.LABEL2"
+                style="@style/TextStyle.LABEL_SEMIBOLD"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginStart="4dp"
@@ -209,12 +209,13 @@
     </LinearLayout>
 
     <com.google.android.material.progressindicator.LinearProgressIndicator
-        android:id="@+id/progress_indicator_signup"
+        android:id="@+id/progress_indicator"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:indeterminate="true"
         android:indeterminateTint="@color/lavender_blue"
         android:visibility="gone"
+        app:indicatorColor="@color/lavender_blue"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />

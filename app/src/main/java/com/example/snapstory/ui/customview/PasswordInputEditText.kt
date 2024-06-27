@@ -61,7 +61,7 @@ class PasswordInputEditText : AppCompatEditText, View.OnTouchListener  {
     }
 
     private fun isValidPassword(password: CharSequence): Boolean {
-        return password.length in 8..10
+        return password.length >= 8
     }
 
 }
