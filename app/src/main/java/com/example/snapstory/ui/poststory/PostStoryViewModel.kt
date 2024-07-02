@@ -9,7 +9,7 @@ import java.io.File
 
 class PostStoryViewModel(private val postStoryRepository: PostStoryRepository) : ViewModel() {
 
-    fun addImage(image: File, description: String): LiveData<UserResult<PostStoryResponse>> {
-        return postStoryRepository.postStory(image, description)
+    fun addImage(image: File, description: String, lat: Double?, lon: Double?): LiveData<UserResult<PostStoryResponse>> {
+        return postStoryRepository.postStory(image, description, lat, lon)
     }
 }

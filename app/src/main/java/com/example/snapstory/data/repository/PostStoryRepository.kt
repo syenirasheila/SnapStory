@@ -13,6 +13,7 @@ import com.example.snapstory.data.remote.api.ApiService
 import com.example.snapstory.data.remote.model.PostStoryResponse
 import com.example.snapstory.data.remote.model.StoryItem
 import com.example.snapstory.helper.UserResult
+import com.example.snapstory.helper.handleError
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.flow.first
 import okhttp3.MediaType.Companion.toMediaType
@@ -20,7 +21,6 @@ import okhttp3.MediaType.Companion.toMediaTypeOrNull
 import okhttp3.MultipartBody
 import okhttp3.RequestBody.Companion.asRequestBody
 import okhttp3.RequestBody.Companion.toRequestBody
-import retrofit2.HttpException
 import java.io.File
 
 class PostStoryRepository private constructor(
@@ -63,13 +63,14 @@ class PostStoryRepository private constructor(
                 val response = apiService.detailStory("Bearer $token", id)
                 val result = response.story
                 emit(UserResult.Success(result))
-            } catch (e: HttpException) {
-                emit(UserResult.Error(e.message.toString()))
+            } catch (e: Exception) {
+                val errorMessage = handleError(e)
+                emit(UserResult.Error(errorMessage))
             }
         }
     }
 
-    fun postStory(image: File, description: String): LiveData<UserResult<PostStoryResponse>> {
+    fun postStory(image: File, description: String, lat: Double?, lon: Double?): LiveData<UserResult<PostStoryResponse>> {
         return liveData(Dispatchers.IO) {
             emit(UserResult.Loading)
             try {
@@ -81,10 +82,33 @@ class PostStoryRepository private constructor(
                     image.name,
                     requestImage
                 )
-                val response = apiService.postStory("Bearer $token", imageMultipart, requestDescription)
+                val latPart = lat?.toString()?.toRequestBody("text/plain".toMediaType())
+                val lonPart = lon?.toString()?.toRequestBody("text/plain".toMediaType())
+
+                val response = if (latPart != null && lonPart != null) {
+                    apiService.postStory("Bearer $token", imageMultipart, requestDescription, latPart, lonPart)
+                } else {
+                    apiService.postStory("Bearer $token", imageMultipart, requestDescription)
+                }
                 emit(UserResult.Success(response))
             } catch (e: Exception) {
-                emit(UserResult.Error(e.message.toString()))
+                val errorMessage = handleError(e)
+                emit(UserResult.Error(errorMessage))
+            }
+        }
+    }
+
+    fun getStoryLocation(): LiveData<UserResult<List<StoryItem>>> {
+        return liveData(Dispatchers.IO) {
+            emit(UserResult.Loading)
+            try {
+                val token = userSessionPreference.getUserToken().first()
+                val response = apiService.getAllStory("Bearer $token", location = 1)
+                val result = response.listStory
+                emit(UserResult.Success(result))
+            } catch (e: Exception) {
+                val errorMessage = handleError(e)
+                emit(UserResult.Error(errorMessage))
             }
         }
     }

@@ -58,8 +58,8 @@
     <string name="tv_story_description">Story description</string>
     <string name="story_detail_toolbar">Story detail</string>
     <string name="tv_loading">Loading, please wait…</string>
-    <string name="permission_granted">Permission request granted</string>
-    <string name="permission_denied">Permission request denied</string>
+    <string name="permissions_granted">Permission request granted</string>
+    <string name="permissions_denied">Permission request denied</string>
     <string name="failed_to_start_camera">Failed to start camera, please try again</string>
     <string name="failed_to_take_photo">Failed to take photo, please try again</string>
     <string name="camera_activity_tag">CameraActivity</string>
@@ -67,4 +67,12 @@
     <string name="postStory_failed">Failed to post story</string>
     <string name="image_empty">Please add an image</string>
     <string name="storyDetail_failed">Failed to show the story detail</string>
+    <string name="title_activity_story_maps">StoryMapsActivity</string>
+    <string name="story_location_failed">Failed to get story location</string>
+    <string name="btn_maps">Story Maps</string>
+    <string name="btn_localization">Change language</string>
+    <string name="btn_location_permission">Location permission</string>
+    <string name="location_enabled">Location enabled</string>
+    <string name="location_disabled">Location disabled</string>
+
 </resources>

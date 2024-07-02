@@ -25,14 +25,21 @@ class PostStoryActivity : AppCompatActivity() {
         ViewModelFactory.getInstance(application)
     }
     private var photoUri: Uri? = null
+    private var latitude: Double? = null
+    private var longitude: Double? = null
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         binding = ActivityPostStoryBinding.inflate(layoutInflater)
         setContentView(binding.root)
 
-        val intent = intent.getStringExtra(AddImageActivity.EXTRA_CAMERAX_IMAGE)
-        photoUri = Uri.parse(intent)
+        val intent = intent
+        val photoUriString = intent.getStringExtra(AddImageActivity.EXTRA_CAMERAX_IMAGE)
+        photoUri = photoUriString?.let { Uri.parse(it) }
+
+        latitude = intent.getDoubleExtra(AddImageActivity.EXTRA_LOCATION_LAT, Double.NaN)
+        longitude = intent.getDoubleExtra(AddImageActivity.EXTRA_LOCATION_LON, Double.NaN)
+
 
         Glide.with(this)
             .load(photoUri)
@@ -54,7 +61,10 @@ class PostStoryActivity : AppCompatActivity() {
             val description = binding.inputDescription.text.toString().trim()
             Log.d("Image File", "Show Image: ${imageFile.path}")
 
-            postStoryViewModel.addImage(imageFile, description).observe(this) {
+            val lat = if (latitude != null && !latitude!!.isNaN()) latitude else null
+            val lon = if (longitude != null && !longitude!!.isNaN()) longitude else null
+
+            postStoryViewModel.addImage(imageFile, description,lat, lon).observe(this) {
                 when (it) {
                     is UserResult.Success<*> -> {
                         showLoading(false)
@@ -72,11 +82,6 @@ class PostStoryActivity : AppCompatActivity() {
                     }
                 }
             }
-
-            postStoryViewModel.addImage(
-                imageFile,
-                description
-            )
 
         } ?: showToast(getString(R.string.image_empty))
     }

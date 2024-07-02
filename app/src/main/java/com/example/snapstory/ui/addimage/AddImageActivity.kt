@@ -3,6 +3,7 @@ package com.example.snapstory.ui.addimage
 import android.Manifest
 import android.content.Intent
 import android.content.pm.PackageManager
+import android.location.Location
 import android.net.Uri
 import android.os.Build
 import android.os.Bundle
@@ -20,11 +21,14 @@ import androidx.camera.core.ImageCapture
 import androidx.camera.core.ImageCaptureException
 import androidx.camera.core.Preview
 import androidx.camera.lifecycle.ProcessCameraProvider
+import androidx.core.app.ActivityCompat
 import androidx.core.content.ContextCompat
 import com.example.snapstory.R
 import com.example.snapstory.databinding.ActivityAddImageBinding
 import com.example.snapstory.helper.createCustomTempFile
 import com.example.snapstory.ui.poststory.PostStoryActivity
+import com.google.android.gms.location.FusedLocationProviderClient
+import com.google.android.gms.location.LocationServices
 
 class AddImageActivity : AppCompatActivity() {
 
@@ -32,16 +36,46 @@ class AddImageActivity : AppCompatActivity() {
     private var cameraSelector: CameraSelector = CameraSelector.DEFAULT_BACK_CAMERA
     private var imageCapture: ImageCapture? = null
     private var currentImageUri: Uri? = null
+    private lateinit var fusedLocationClient: FusedLocationProviderClient
+    private var locationEnabled: Boolean = false
+    private var currentLocation: Location? = null
 
     private val requestPermissionLauncher = registerForActivityResult(
-        ActivityResultContracts.RequestPermission()
-    ) { isGranted: Boolean ->
-        val message = if (isGranted) getString(R.string.permission_granted) else getString(R.string.permission_denied)
-        showToast(message)
+        ActivityResultContracts.RequestMultiplePermissions()
+    ){ permissions ->
+        permissions.entries.forEach {
+            val permission = it.key
+            val granted = it.value
+
+            when (permission) {
+                REQUIRED_FINE_LOCATION_PERMISSION, REQUIRED_COARSE_LOCATION_PERMISSION -> {
+                    if (granted) {
+                        showToast(getString(R.string.permissions_granted))
+                        enableLocation()
+                    } else {
+                        showToast(getString(R.string.permissions_denied))
+                        locationEnabled = false
+                        binding.btnLocationPermission.setImageResource(R.drawable.ic_map_slash_add)
+                    }
+                }
+                REQUIRED_CAMERA_PERMISSION -> {
+                    if (granted) {
+                        showToast(getString(R.string.permissions_granted))
+                    } else {
+                        showToast(getString(R.string.permissions_denied))
+                    }
+                }
+            }
+        }
     }
 
     private fun allPermissionsGranted() =
-        ContextCompat.checkSelfPermission(this, REQUIRED_PERMISSION) == PackageManager.PERMISSION_GRANTED
+        ContextCompat.checkSelfPermission(this, REQUIRED_CAMERA_PERMISSION) == PackageManager.PERMISSION_GRANTED
+
+    private fun allLocationPermissionsGranted() =
+        ContextCompat.checkSelfPermission(this, REQUIRED_FINE_LOCATION_PERMISSION) == PackageManager.PERMISSION_GRANTED &&
+                ContextCompat.checkSelfPermission(this, REQUIRED_COARSE_LOCATION_PERMISSION) == PackageManager.PERMISSION_GRANTED
+
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -49,7 +83,7 @@ class AddImageActivity : AppCompatActivity() {
         setContentView(binding.root)
 
         if (!allPermissionsGranted()) {
-            requestPermissionLauncher.launch(REQUIRED_PERMISSION)
+            requestPermissionLauncher.launch(arrayOf(REQUIRED_CAMERA_PERMISSION))
         }
 
         with(binding) {
@@ -65,7 +99,14 @@ class AddImageActivity : AppCompatActivity() {
             btnGallery.setOnClickListener {
                 openGallery()
             }
+            btnLocationPermission.setOnClickListener {
+                toggleLocation()
+            }
+
         }
+
+        fusedLocationClient = LocationServices.getFusedLocationProviderClient(this)
+
     }
 
     override fun onResume() {
@@ -113,6 +154,10 @@ class AddImageActivity : AppCompatActivity() {
             override fun onImageSaved(output: ImageCapture.OutputFileResults) {
                 val intent = Intent(this@AddImageActivity, PostStoryActivity::class.java).apply {
                     putExtra(EXTRA_CAMERAX_IMAGE, output.savedUri.toString())
+                    currentLocation?.let {
+                        putExtra(EXTRA_LOCATION_LAT, it.latitude)
+                        putExtra(EXTRA_LOCATION_LON, it.longitude)
+                    }
                 }
                 startActivity(intent)
             }
@@ -123,6 +168,7 @@ class AddImageActivity : AppCompatActivity() {
             }
         })
     }
+
 
     private fun openGallery() {
         launcherGallery.launch(PickVisualMediaRequest(ActivityResultContracts.PickVisualMedia.ImageOnly))
@@ -172,6 +218,47 @@ class AddImageActivity : AppCompatActivity() {
         orientationEventListener.disable()
     }
 
+    private fun toggleLocation() {
+        if (locationEnabled) {
+            locationEnabled = false
+            binding.btnLocationPermission.setImageResource(R.drawable.ic_map_slash_add)
+            currentLocation = null
+            showToast(getString(R.string.location_disabled))
+        } else {
+            if (allLocationPermissionsGranted()) {
+                enableLocation()
+            } else {
+                requestLocationPermissions()
+            }
+        }
+    }
+
+    private fun requestLocationPermissions() {
+        requestPermissionLauncher.launch(
+            arrayOf(REQUIRED_FINE_LOCATION_PERMISSION, REQUIRED_COARSE_LOCATION_PERMISSION)
+        )
+    }
+
+    private fun enableLocation() {
+        locationEnabled = true
+        binding.btnLocationPermission.setImageResource(R.drawable.ic_map_add)
+        showToast(getString(R.string.location_enabled))
+        if (ActivityCompat.checkSelfPermission(
+                this,
+                REQUIRED_FINE_LOCATION_PERMISSION
+            ) != PackageManager.PERMISSION_GRANTED && ActivityCompat.checkSelfPermission(
+                this,
+                REQUIRED_COARSE_LOCATION_PERMISSION
+            ) != PackageManager.PERMISSION_GRANTED
+        ) {
+            fusedLocationClient.lastLocation.addOnSuccessListener { location ->
+                if (location != null) {
+                    currentLocation = location
+                }
+            }
+        }
+    }
+
     private fun showToast(message: String) {
         Toast.makeText(this, message, Toast.LENGTH_SHORT).show()
     }
@@ -179,7 +266,12 @@ class AddImageActivity : AppCompatActivity() {
     companion object {
         private const val TAG = "CameraActivity"
         const val EXTRA_CAMERAX_IMAGE = "CameraX Image"
+        const val EXTRA_LOCATION_LAT = "Location Latitude"
+        const val EXTRA_LOCATION_LON = "Location Longitude"
         const val CAMERAX_RESULT = 200
-        private const val REQUIRED_PERMISSION = Manifest.permission.CAMERA
+        private const val REQUIRED_CAMERA_PERMISSION = Manifest.permission.CAMERA
+        private const val REQUIRED_FINE_LOCATION_PERMISSION = Manifest.permission.ACCESS_FINE_LOCATION
+        private const val REQUIRED_COARSE_LOCATION_PERMISSION = Manifest.permission.ACCESS_COARSE_LOCATION
+
     }
 }

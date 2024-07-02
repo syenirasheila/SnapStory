@@ -3,6 +3,7 @@ package com.example.snapstory.ui.main
 import android.content.Intent
 import android.net.Uri
 import android.os.Bundle
+import android.provider.Settings
 import android.util.Log
 import androidx.activity.result.contract.ActivityResultContracts
 import androidx.activity.viewModels
@@ -19,6 +20,7 @@ import com.example.snapstory.ui.loading.LoadingStateAdapter
 import com.example.snapstory.ui.onboarding.OnboardingActivity
 import com.example.snapstory.ui.storydetail.StoryDetailActivity
 import com.example.snapstory.ui.storydetail.StoryDetailActivity.Companion.EXTRA_ID
+import com.example.snapstory.ui.storymaps.StoryMapsActivity
 
 class MainActivity : AppCompatActivity() {
 
@@ -76,6 +78,16 @@ class MainActivity : AppCompatActivity() {
 
         binding.btnAddStory.setOnClickListener {
             openCamera()
+        }
+
+        binding.btnLocalization.setOnClickListener {
+            val intent = Intent(Settings.ACTION_LOCALE_SETTINGS)
+            startActivity(intent)
+        }
+
+        binding.btnMaps.setOnClickListener {
+            val intent = Intent(this, StoryMapsActivity::class.java)
+            startActivity(intent)
         }
 
     }

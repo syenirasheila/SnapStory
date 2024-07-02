@@ -51,6 +51,32 @@
                 tools:ignore="NotSibling,TextContrastCheck" />
 
             <ImageButton
+                android:id="@+id/btn_maps"
+                android:layout_width="48dp"
+                android:layout_height="48dp"
+                android:background="@null"
+                android:contentDescription="@string/btn_maps"
+                android:src="@drawable/ic_maps"
+                app:layout_constraintEnd_toStartOf="@id/btn_localization"
+                app:layout_constraintHorizontal_bias="1.0"
+                app:layout_constraintTop_toTopOf="parent"
+                app:layout_constraintVertical_bias="0.5"
+                tools:ignore="ImageContrastCheck" />
+
+            <ImageButton
+                android:id="@+id/btn_localization"
+                android:layout_width="48dp"
+                android:layout_height="48dp"
+                android:background="@null"
+                android:contentDescription="@string/btn_localization"
+                android:src="@drawable/ic_localization"
+                app:layout_constraintEnd_toStartOf="@id/btn_logout"
+                app:layout_constraintHorizontal_bias="1.0"
+                app:layout_constraintTop_toTopOf="parent"
+                app:layout_constraintVertical_bias="0.5"
+                tools:ignore="ImageContrastCheck" />
+
+            <ImageButton
                 android:id="@+id/btn_logout"
                 android:layout_width="48dp"
                 android:layout_height="48dp"
@@ -92,13 +118,14 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_margin="24dp"
+        android:backgroundTint="@color/lavender"
         android:contentDescription="@string/btn_add_story"
         android:src="@drawable/ic_add"
-        android:backgroundTint="@color/lavender"
-        app:tint="@color/white"
+        app:fabCustomSize="56dp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:shapeAppearanceOverlay="@style/ShapeAppearance.Fab.Custom"
-        app:fabCustomSize="56dp" />
+        app:tint="@color/white"
+        tools:ignore="ImageContrastCheck" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

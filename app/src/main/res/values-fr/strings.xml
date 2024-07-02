@@ -59,8 +59,8 @@
     <string name="tv_story_description">Description de l\'histoire</string>
     <string name="story_detail_toolbar">Détail de l\'histoire</string>
     <string name="tv_loading">Chargement, veuillez patienter…</string>
-    <string name="permission_granted">Demande de permission accordée</string>
-    <string name="permission_denied">Demande de permission refusée</string>
+    <string name="permissions_granted">Demande d\'autorisation accordée</string>
+    <string name="permissions_denied">Demande d\'autorisation refusée</string>
     <string name="failed_to_start_camera">Impossible de démarrer la caméra, veuillez réessayer</string>
     <string name="failed_to_take_photo">Impossible de prendre la photo, veuillez réessayer</string>
     <string name="camera_activity_tag">CameraActivity</string>
@@ -68,4 +68,11 @@
     <string name="postStory_failed">Échec de la publication de l\'histoire</string>
     <string name="image_empty">Veuillez ajouter une image</string>
     <string name="storyDetail_failed">Échec de l\'affichage du détail de l\'histoire</string>
+    <string name="title_activity_story_maps">ActivitéStoryMaps</string>
+    <string name="story_location_failed">Échec de l\'obtention de l\'emplacement de l\'histoire</string>
+    <string name="btn_maps">Cartes d\'histoires</string>
+    <string name="btn_localization">Changer de langue</string>
+    <string name="btn_location_permission">Autorisation de localisation</string>
+    <string name="location_enabled">Localisation activée</string>
+    <string name="location_disabled">Localisation désactivée</string>
 </resources>

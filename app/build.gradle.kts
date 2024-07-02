@@ -10,6 +10,8 @@ android {
     namespace = "com.example.snapstory"
     compileSdk = 34
 
+    testOptions.unitTests.isReturnDefaultValues = true
+
     defaultConfig {
         applicationId = "com.example.snapstory"
         minSdk = 28
@@ -50,10 +52,6 @@ dependencies {
     implementation(libs.material)
     implementation(libs.androidx.activity)
     implementation(libs.androidx.constraintlayout)
-    implementation(libs.play.services.maps)
-    testImplementation(libs.junit)
-    androidTestImplementation(libs.androidx.junit)
-    androidTestImplementation(libs.androidx.espresso.core)
 
     implementation (libs.viewbindingpropertydelegate)
     implementation (libs.androidx.activity.ktx)
@@ -84,5 +82,22 @@ dependencies {
     implementation(libs.androidx.camera.view)
     implementation (libs.androidx.camera.camera2)
     implementation (libs.androidx.camera.lifecycle)
+
+    implementation(libs.play.services.maps)
+    implementation (libs.play.services.location)
+
+    androidTestImplementation(libs.androidx.core.testing)
+    androidTestImplementation(libs.kotlinx.coroutines.test)
+
+    testImplementation(libs.junit)
+    androidTestImplementation(libs.androidx.junit)
+    androidTestImplementation(libs.androidx.espresso.core)
+    androidTestImplementation (libs.androidx.espresso.intents)
+    androidTestImplementation (libs.androidx.espresso.contrib)
+
+    testImplementation(libs.androidx.core.testing)
+    testImplementation(libs.kotlinx.coroutines.test)
+    testImplementation(libs.mockito.core)
+    testImplementation(libs.mockito.inline)
 
 }

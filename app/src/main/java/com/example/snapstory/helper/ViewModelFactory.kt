@@ -9,6 +9,8 @@ import com.example.snapstory.ui.poststory.PostStoryViewModel
 import com.example.snapstory.ui.signin.SigninViewModel
 import com.example.snapstory.ui.signup.SignupViewModel
 import com.example.snapstory.ui.storydetail.StoryDetailViewModel
+import com.example.snapstory.ui.storymaps.StoryMapsViewModel
+
 class ViewModelFactory (private val mApplication: Application) : ViewModelProvider.NewInstanceFactory() {
 
     @Suppress("UNCHECKED_CAST")
@@ -31,6 +33,9 @@ class ViewModelFactory (private val mApplication: Application) : ViewModelProvid
             }
             modelClass.isAssignableFrom(PostStoryViewModel::class.java) -> {
                 PostStoryViewModel(RepositoryInjection.providePostStoryRepository(mApplication)) as T
+            }
+            modelClass.isAssignableFrom(StoryMapsViewModel::class.java) -> {
+                StoryMapsViewModel(RepositoryInjection.providePostStoryRepository(mApplication)) as T
             }
 
         else -> throw IllegalArgumentException("Unknown ViewModel class: ${modelClass.name}")
