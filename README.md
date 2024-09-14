@@ -3,7 +3,7 @@
 
 ## ✨ About The Project
 
-This project is created as part of Dicoding's Android Intermediate course and Bangkit Academy. The objective of this project is to create a story app that integrates several components:
+This project is created as part of Dicoding's Android Intermediate course. The objective of this project is to create a story app that integrates several components:
 - Advanced UI
 - Animation
 - Localization & Accessibility
